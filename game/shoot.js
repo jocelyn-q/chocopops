@@ -98,7 +98,6 @@ function player_hit_by_enemy() {
 
   // Check if the distance is less than the collision threshold
   if (distanceX <= collisionThreshold && distanceY <= collisionThreshold) {
-    console.log("hit by enemy");
     player1.hurt();
   }
 }
