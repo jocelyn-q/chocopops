@@ -45,12 +45,18 @@ function bullet_collision() {
 
 function bullet_hit() {
   //collision between bullet and walls
+  console.log(player2.position.x, player2.position.y);
+  if (player2.isDead) {
+    return;
+  }
   for (var i = 0; i < player1.bullets.length; i++) {
     if (Math.abs(player1.bullets[i].position.x) - Math.abs(player2.position.x) <= 20 && Math.abs(player1.bullets[i].position.y) - Math.abs(player2.position.y) <= 20) {
       console.log("hit");
-      player2.enemyDead();
       scene.remove(player1.bullets[i]);
+      scene.remove(player2.graphic);
       player1.bullets.splice(i, 1);
+      player2.isDead = true;
+      break;
     }
   }
 }
