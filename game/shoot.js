@@ -30,6 +30,7 @@ function collisions() {
   player_collision();
   player_falling();
   bullet_hit();
+  player_hit_by_enemy();
 }
 
 function bullet_collision() {
@@ -58,6 +59,17 @@ function bullet_hit() {
       player1.win();
       break;
     }
+  }
+}
+
+function player_hit_by_enemy() {
+  //collision between bullet and walls
+  if (player1.isInvicible) {
+    return;
+  }
+  if (Math.abs(player1.position.x) - Math.abs(player2.position.x) <= 10 && Math.abs(player1.position.y) - Math.abs(player2.position.y) <= 10) {
+    console.log("hit by enemy");
+    player1.hurt();
   }
 }
 

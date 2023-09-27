@@ -7,6 +7,7 @@ var Player = function (name, color, position, direction) {
   this.speed = 0;
   this.isDead = false;
   this.isWin = false;
+  this.isInvicible = false;
 
   this.material = new THREE.MeshLambertMaterial({
     color: color,
@@ -31,6 +32,19 @@ Player.prototype.dead = function () {
   $("#container").html("");
   jQuery("#" + this.name + " >.life").text("Tu es mort !");
   init();
+};
+
+Player.prototype.hurt = function () {
+  this.life--;
+  this.isInvicible = true;
+
+  if (this.life <= 0) {
+    this.dead();
+  } else {
+    setTimeout(() => {
+      this.isInvicible = false;
+    }, 3000);
+  }
 };
 
 Player.prototype.win = function () {
