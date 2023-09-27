@@ -6,6 +6,7 @@ var Player = function (name, color, position, direction) {
   this.direction = direction;
   this.speed = 0;
   this.isDead = false;
+  this.isWin = false;
 
   this.material = new THREE.MeshLambertMaterial({
     color: color,
@@ -32,6 +33,31 @@ Player.prototype.dead = function () {
   init();
 };
 
+Player.prototype.win = function () {
+  this.graphic.position.z = this.graphic.position.z - 0.1;
+  this.isWin = true;
+
+  // Create a new div element
+  const winDiv = document.createElement("div");
+  winDiv.textContent = "Tu as gagné !";
+
+  // Add a class or ID to the new div if needed
+  winDiv.className = "win-message"; // You can style it using CSS later
+
+  // Append the div to the container with the ID "container"
+  const container = document.getElementById("container");
+  container.appendChild(winDiv);
+
+  setTimeout(() => {
+    // Remove the div after 3 seconds
+    container.removeChild(winDiv);
+    //Nettoyage de la div container
+    $("#container").html("");
+    this.isWin = false;
+    init();
+  }, 3000);
+};
+
 Player.prototype.accelerate = function (distance) {
   var max = 2;
 
@@ -51,6 +77,8 @@ Player.prototype.decelerate = function (distance) {
 };
 
 Player.prototype.displayInfo = function () {
+  if (this.isWin) return;
+
   jQuery("#" + this.name + " >.life").text(this.life);
 };
 

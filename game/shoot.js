@@ -45,7 +45,6 @@ function bullet_collision() {
 
 function bullet_hit() {
   //collision between bullet and walls
-  console.log(player2.position.x, player2.position.y);
   if (player2.isDead) {
     return;
   }
@@ -56,6 +55,7 @@ function bullet_hit() {
       scene.remove(player2.graphic);
       player1.bullets.splice(i, 1);
       player2.isDead = true;
+      player1.win();
       break;
     }
   }
