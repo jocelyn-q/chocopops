@@ -71,7 +71,7 @@ function move_enemy() {
   const wallThreshold = 20; // The distance at which player2 will change direction when near a wall
 
   // Calculate the new position for player2
-  const newX = this.player2.graphic.position.y + speed;
+  const newX = this.player2.position.y + speed;
   // Check if player2 is about to hit a wall on the right side
   if (newX > HEIGHT / 2 - wallThreshold) {
     // Change direction when near the wall
@@ -88,7 +88,16 @@ function player_hit_by_enemy() {
   if (player1.isInvicible) {
     return;
   }
-  if (Math.abs(player1.position.x) - Math.abs(player2.position.x) <= 10 && Math.abs(player1.position.y) - Math.abs(player2.position.y) <= 10) {
+  const player1Position = player1.graphic.position;
+  const player2Position = player2.graphic.position;
+  const collisionThreshold = 15; // Adjust the threshold as needed
+
+  // Calculate the distance between player1 and player2
+  const distanceX = Math.abs(player1Position.x - player2Position.x);
+  const distanceY = Math.abs(player1Position.y - player2Position.y);
+
+  // Check if the distance is less than the collision threshold
+  if (distanceX <= collisionThreshold && distanceY <= collisionThreshold) {
     console.log("hit by enemy");
     player1.hurt();
   }
