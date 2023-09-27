@@ -8,6 +8,7 @@ var Player = function (name, color, position, direction) {
   this.isDead = false;
   this.isWin = false;
   this.isInvicible = false;
+  this.movepos = 1;
 
   this.material = new THREE.MeshLambertMaterial({
     color: color,

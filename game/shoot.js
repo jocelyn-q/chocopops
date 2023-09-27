@@ -31,6 +31,7 @@ function collisions() {
   player_falling();
   bullet_hit();
   player_hit_by_enemy();
+  move_enemy();
 }
 
 function bullet_collision() {
@@ -60,6 +61,26 @@ function bullet_hit() {
       break;
     }
   }
+}
+
+function move_enemy() {
+  if (player2.isDead) {
+    return;
+  }
+  const speed = 1; // Adjust the speed as needed
+  const wallThreshold = 20; // The distance at which player2 will change direction when near a wall
+
+  // Calculate the new position for player2
+  const newX = this.player2.graphic.position.y + speed;
+  // Check if player2 is about to hit a wall on the right side
+  if (newX > HEIGHT / 2 - wallThreshold) {
+    // Change direction when near the wall
+    this.player2.movepos *= -1;
+  } else if (newX < -HEIGHT / 2 + wallThreshold) {
+    this.player2.movepos *= -1;
+  }
+  this.player2.graphic.position.y += speed * this.player2.movepos;
+  this.player2.position.y += speed * this.player2.movepos;
 }
 
 function player_hit_by_enemy() {
