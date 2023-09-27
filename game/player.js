@@ -12,7 +12,11 @@ var Player = function (name, color, position, direction) {
 
   var singleGeometry = new THREE.Geometry();
 
-  vehiculeMesh = new THREE.ConeGeometry(5, 20, 32);
+  if (this.name === "player2") {
+    vehiculeMesh = new THREE.BoxGeometry(20, 20, 20);
+  } else {
+    vehiculeMesh = new THREE.ConeGeometry(5, 20, 32);
+  }
   this.graphic = new THREE.Mesh(vehiculeMesh, this.material);
   this.graphic.position.z = 6;
 
@@ -25,6 +29,14 @@ Player.prototype.dead = function () {
   $("#container").html("");
   jQuery("#" + this.name + " >.life").text("Tu es mort !");
   init();
+};
+
+Player.prototype.enemyDead = function () {
+  this.position.x = 0;
+  this.position.y = 0;
+  this.graphic.position.x = this.position.x;
+  this.graphic.position.y = this.position.y;
+  console.log("enemyDead");
 };
 
 Player.prototype.accelerate = function (distance) {

@@ -1,78 +1,72 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <title>EPITA 2023 - SIGL</title>
     <style>
-        body {
-            background: #000000; 
-        }
+      body {
+        background: #000000;
+      }
 
-        #container {
-            margin : auto; 
-            border: 1px solid white;
-            background: #000000;
-        }
-        
-        #player1 {
-                margin : auto; 
-                text-align: center;
-        }
+      #container {
+        margin: auto;
+        border: 1px solid white;
+        background: #000000;
+      }
 
-        .life {
-            color:white;
-        }
+      #player1 {
+        margin: auto;
+        text-align: center;
+      }
+
+      .life {
+        color: white;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="container"></div>
     <div id="player1">
-        <strong>Joueur 1</strong>
-        <span class="life">3</span> vies
+      <strong>Joueur 1</strong>
+      <span class="life">3</span> vies
     </div>
-</body>
+  </body>
 
-<script src="js/three.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/OrbitControls.js"></script>
-<script src="js/THREEx.KeyboardState.js"></script>
-<script src="game/player.js"></script>
-<script src="game/graphic.js"></script>
-<script src="game/physic.js"></script>
-<script src="game/shoot.js"></script>
+  <script src="js/three.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/THREEx.KeyboardState.js"></script>
+  <script src="game/player.js"></script>
+  <script src="game/graphic.js"></script>
+  <script src="game/physic.js"></script>
+  <script src="game/shoot.js"></script>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     var container, scene, camera, renderer, controls, stats;
     var keyboard = new THREEx.KeyboardState();
     var clock = new THREE.Clock();
-    var player1,
-        player2;
+    var player1, player2;
     var WIDTH = 600,
-        HEIGHT = 400;
+      HEIGHT = 400;
 
     init();
     animate();
 
-    function animate()
-    {
-        requestAnimationFrame(animate);
-        render();
-        update();
-        player1.displayInfo();
-        shoot();
-        collisions();
+    function animate() {
+      requestAnimationFrame(animate);
+      render();
+      update();
+      player1.displayInfo();
+      shoot();
+      collisions();
     }
 
-    function render()
-    {
-        renderer.render(scene, camera);
+    function render() {
+      renderer.render(scene, camera);
     }
 
-    $(document).ready(function() {
-        $('#container')
-            .css('width', WIDTH)
-            .css('height', HEIGHT)
-        ;
+    $(document).ready(function () {
+      $("#container").css("width", WIDTH).css("height", HEIGHT);
     });
-</script>
+  </script>
 </html>
