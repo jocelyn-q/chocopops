@@ -126,10 +126,6 @@ function player_collision() {
 }
 
 function player_falling() {
-  if (player1.isInvicible) {
-    return;
-  }
-
   var nb_tile = 10;
   var sizeOfTileX = WIDTH / nb_tile;
   var sizeOfTileY = HEIGHT / nb_tile;
@@ -148,7 +144,7 @@ function player_falling() {
       var mtileY = (element[1] + sizeOfTileY / 2) | 0;
 
       if (this.x > tileX && x < mtileX && y > tileY && y < mtileY) {
-        player1.hurt();
+        player1.dead();
       }
     }
   }
