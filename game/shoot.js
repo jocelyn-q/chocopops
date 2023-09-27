@@ -50,7 +50,7 @@ function bullet_hit() {
     return;
   }
   for (var i = 0; i < player1.bullets.length; i++) {
-    if (Math.abs(player1.bullets[i].position.x) - Math.abs(player2.position.x) <= 20 && Math.abs(player1.bullets[i].position.y) - Math.abs(player2.position.y) <= 20) {
+    if (Math.abs(player1.bullets[i].position.x) - Math.abs(player2.position.x) <= 10 && Math.abs(player1.bullets[i].position.y) - Math.abs(player2.position.y) <= 10) {
       console.log("hit");
       scene.remove(player1.bullets[i]);
       scene.remove(player2.graphic);
@@ -78,13 +78,29 @@ function player_collision() {
   var x = player1.graphic.position.x + WIDTH / 2;
   var y = player1.graphic.position.y + HEIGHT / 2;
 
-  if (x > WIDTH) player1.graphic.position.x -= x - WIDTH;
-  if (x < 0) player1.graphic.position.x -= x;
-  if (y < 0) player1.graphic.position.y -= y;
-  if (y > HEIGHT) player1.graphic.position.y -= y - HEIGHT;
+  if (x > WIDTH) {
+    player1.position.x -= x - WIDTH;
+    player1.graphic.position.x -= x - WIDTH;
+  }
+  if (x < 0) {
+    player1.position.x -= x;
+    player1.graphic.position.x -= x;
+  }
+  if (y < 0) {
+    player1.position.y -= y;
+    player1.graphic.position.y -= y;
+  }
+  if (y > HEIGHT) {
+    player1.position.y -= y - HEIGHT;
+    player1.graphic.position.y -= y - HEIGHT;
+  }
 }
 
 function player_falling() {
+  if (player1.isInvicible) {
+    return;
+  }
+
   var nb_tile = 10;
   var sizeOfTileX = WIDTH / nb_tile;
   var sizeOfTileY = HEIGHT / nb_tile;
@@ -102,7 +118,7 @@ function player_falling() {
       var mtileX = (element[0] + sizeOfTileX / 2) | 0;
       var mtileY = (element[1] + sizeOfTileY / 2) | 0;
 
-      if (x > tileX && x < mtileX && y > tileY && y < mtileY) {
+      if (this.x > tileX && x < mtileX && y > tileY && y < mtileY) {
         player1.dead();
       }
     }

@@ -38,11 +38,23 @@ Player.prototype.hurt = function () {
   this.life--;
   this.isInvicible = true;
 
+  // Create a new div element
+  const inviDiv = document.createElement("div");
+  inviDiv.textContent = "Tu es invincible pour 3 s !";
+
+  // Add a class or ID to the new div if needed
+  inviDiv.className = "inv"; // You can style it using CSS later
+
+  // Append the div to the container with the ID "container"
+  const container = document.getElementById("container");
+  container.appendChild(inviDiv);
+
   if (this.life <= 0) {
     this.dead();
   } else {
     setTimeout(() => {
       this.isInvicible = false;
+      container.removeChild(inviDiv);
     }, 3000);
   }
 };
