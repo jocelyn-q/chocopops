@@ -148,7 +148,7 @@ function player_falling() {
       var mtileY = (element[1] + sizeOfTileY / 2) | 0;
 
       if (this.x > tileX && x < mtileX && y > tileY && y < mtileY) {
-        player1.dead();
+        player1.hurt();
       }
     }
   }
